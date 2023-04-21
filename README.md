@@ -1,2 +1,2 @@
 # terraform-aws-gitops
-The module enables users to implement GitOps using AWS CodeBuild.
+Terraform module that enables users to implement GitOps using AWS CodeBuild.
