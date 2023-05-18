@@ -1,3 +1,7 @@
+####################################
+######         S3             ######
+####################################
+
 resource "aws_s3_bucket" "gitops" {
   bucket = "s3-${var.name}-codebuild"
 }
@@ -6,6 +10,10 @@ resource "aws_s3_bucket_acl" "gitops" {
   bucket = aws_s3_bucket.gitops.id
   acl    = "private"
 }
+
+####################################
+#####          IAM             #####
+####################################
 
 data "aws_iam_policy_document" "assume_role" {
   statement {
@@ -69,6 +77,9 @@ resource "aws_iam_role_policy" "gitops" {
   policy = data.aws_iam_policy_document.gitops.json
 }
 
+####################################
+####        CodeBuild           ####
+####################################
 resource "aws_codebuild_project" "gitops" {
   name          = "codebuild-${var.name}"
   description   = "codebuild-${var.description}"
